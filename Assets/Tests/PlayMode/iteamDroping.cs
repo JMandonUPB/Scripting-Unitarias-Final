@@ -16,13 +16,13 @@ public class iteamDroping
     [SetUp]
     public void SetUp()
     {
-        EditorSceneManager.LoadScene("Ciceri_Usuario");
+        EditorSceneManager.LoadScene("Ciceri_Test 1");
        
     }
     [TearDown]
     public void Teardown()
     {
-        EditorSceneManager.UnloadSceneAsync("Ciceri_Usuario");
+        EditorSceneManager.UnloadSceneAsync("Ciceri_Test 1");
     }
     [UnityTest]
     public IEnumerator TestItemDropTier1()
