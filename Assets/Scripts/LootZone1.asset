@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c56a4ef31eff9042bc178bac2bc3893, type: 3}
-  m_Name: Weapon
+  m_Name: LootZone1
   m_EditorClassIdentifier: 
   Prob:
   - rarity: 20
-    Item: {fileID: 1348259950162714, guid: 0a5d9b51542336948b7d2a699f71cd8c, type: 3}
-  - rarity: 12
-    Item: {fileID: 100000, guid: 1c6172cca7780d549a35ed79ce6d37c6, type: 3}
+    Item: {fileID: 4652689504800033478, guid: 0a9c64d80df82374ab352141b44821c4, type: 3}
+  - rarity: 10
+    Item: {fileID: 716971034667350461, guid: 25df5199959f4f34a9f46306e3edcf96, type: 3}

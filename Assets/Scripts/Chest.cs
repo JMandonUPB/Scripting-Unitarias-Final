@@ -5,16 +5,21 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
 
-    private LootableObject Ib;
+    private LootChest Ib;
     float timeOut = 1;
     float timeOut1 = 1;
-    bool Tiem= true;
+    [SerializeField] private int chances = 0;
+    bool Tiem = true;
     public GameObject[] Iteam;
-    public GameObject posicion ;
-    int  i;
+    public GameObject posicion;
+    int i;
     [SerializeField] Animator animatiors;
-   
 
+    private LootChest Id;
+    private void Start()
+    {
+        Ib = GetComponent<LootChest>();
+    }
     // Start is called before the first frame update
     void Drop()
     {
@@ -30,20 +35,24 @@ public class Chest : MonoBehaviour
 
             animatiors.Play("chet");
             timeOut -= Time.deltaTime;
-            if (timeOut<0)
+            if (timeOut < 0)
             {
                 timeOut = timeOut1;
                 Tiem = true;
             }
         }
     }
-     void OnTriggerStay(Collider other)
+    void OnTriggerStay(Collider other)
     {
 
-        if (other.CompareTag("Player") && timeOut== timeOut1)
+        if (other.CompareTag("Player") && timeOut == timeOut1 && chances != 0)
         {
             Drop();
+            Ib.RealizarLoot();
             Tiem = false;
+            chances = 0;
+
+
         }
     }
 }
