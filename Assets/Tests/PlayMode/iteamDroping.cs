@@ -17,27 +17,26 @@ public class iteamDroping
     public void SetUp()
     {
         EditorSceneManager.LoadScene("Ciceri_Usuario");
-        myChest = GameObject.Find("ChestV1");
+       
     }
-    [UnityTest]
-    public IEnumerator TestIteamDropLevel1()
-    {
-        yield return null; //wait one frame
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Assert.IsNotNull(player);
-
-
-        player.transform.position = new Vector3(-0.968f, 2f, 2.76f); 
-        yield return new WaitForSeconds(2);
-
-        objeto = GameObject.FindWithTag("item");
-
-
-        Assert.IsNotNull(objeto);
-        Assert.AreEqual(0, objeto.GetComponent<ItemLevel>().Level);
-    }
+    [TearDown]
     public void Teardown()
     {
         EditorSceneManager.UnloadSceneAsync("Ciceri_Usuario");
     }
+    [UnityTest]
+    public IEnumerator TestItemDropTier1()
+    {
+      
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        player.transform.position = new Vector3(-0.968f, 2f, 2.76f);
+
+        yield return new WaitForSeconds(1);
+        objeto = GameObject.FindWithTag("item");
+
+        Assert.AreEqual(0, objeto.GetComponent<ItemLevel>().Level);
+    }
+
+ 
 }

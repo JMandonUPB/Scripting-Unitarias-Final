@@ -8,6 +8,8 @@ TagManager:
   - CinemachineTarget
   - Ground
   - item
+  - item1
+  - item2
   layers:
   - Default
   - TransparentFX
