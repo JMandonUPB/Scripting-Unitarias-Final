@@ -8,5 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mandon Enemy AI Scene.unity
     guid: 0f4eb9edadbb69b4993761397aee35d8
+  - enabled: 1
+    path: Assets/Scenes/Individual Scenes/Ciceri_Usuario.unity
+    guid: 1479aaca5a628014099617893299fc4f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 698e02fb34bc87643bdf9997f0a5d399, type: 2}

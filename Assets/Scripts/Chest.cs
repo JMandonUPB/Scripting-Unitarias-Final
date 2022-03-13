@@ -14,6 +14,8 @@ public class Chest : MonoBehaviour
     public GameObject posicion;
     int i;
     [SerializeField] Animator animatiors;
+    private GameObject objeto;
+   
 
     private LootChest Id;
     private void Start()
