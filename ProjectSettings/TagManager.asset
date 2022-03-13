@@ -7,9 +7,7 @@ TagManager:
   - HealingPickup
   - CinemachineTarget
   - Ground
-  - item
-  - item1
-  - item2
+  - Enemy
   layers:
   - Default
   - TransparentFX

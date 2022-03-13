@@ -6,7 +6,7 @@ public class FloorCreator : MonoBehaviour
 {
     [SerializeField] GameObject floor;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Instantiate(floor, transform.position, Quaternion.identity);
     }

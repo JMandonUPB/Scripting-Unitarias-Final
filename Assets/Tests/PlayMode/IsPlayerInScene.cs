@@ -1,5 +1,5 @@
-using UnityEditor.SceneManagement;
 using Unity;
+using UnityEditor.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -9,7 +9,7 @@ using UnityEngine.TestTools;
 
 public class IsPlayerInScene
 {
-    string SceneName = "Mandon Enemy AI Scene";
+    string SceneName = "MandonWorldGen";
 
     [SetUp]
     public void SetUp()
