@@ -48,8 +48,10 @@ public class LootSystem : MonoBehaviour
         if (Level != leveOn)
         {
             leveOn = Level;
+            Total = 0;
             localProp = Loots[Level].Prob;
             listDrops();
+         
 
         }
         //if (Cambio)

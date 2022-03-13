@@ -10,6 +10,7 @@ public class Zone_0 : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             LootSystem.Intance.Level = 0;
+        
         }
     }
 }

@@ -6,8 +6,11 @@ public class ItemLevel : MonoBehaviour
 {
    private int level = 0;
 
+    private void Update()
+    {
 
+       Level= LootSystem.Intance.Level ;
 
-    
-    public int Level { get => level; set => level = LootSystem.Intance.Level; }
+    }
+    public int Level { get => level; set => level = value; }
 }

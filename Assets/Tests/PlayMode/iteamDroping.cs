@@ -33,10 +33,42 @@ public class iteamDroping
         player.transform.position = new Vector3(-0.968f, 2f, 2.76f);
 
         yield return new WaitForSeconds(1);
+        Assert.IsNotNull(player);
+      
         objeto = GameObject.FindWithTag("item");
-
+        Assert.IsNotNull(objeto);
         Assert.AreEqual(0, objeto.GetComponent<ItemLevel>().Level);
     }
+    [UnityTest]
+    public IEnumerator TestItemDropTier2()
+    {
 
- 
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject zone = GameObject.Find("zone_1");
+        player.transform.position = new Vector3(-0.968f, 7f, 2.76f);
+        zone.transform.position = new Vector3(-0.968f, 2f, 2.76f);
+        yield return new WaitForSeconds(4);
+        Assert.IsNotNull(player);
+        objeto = GameObject.FindWithTag("item1");
+
+        Assert.IsNotNull(objeto);
+        Assert.AreEqual(1, objeto.GetComponent<ItemLevel>().Level);
+    }
+
+    [UnityTest]
+    public IEnumerator TestItemDropTier3()
+    {
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject zone = GameObject.Find("zone_2");
+        player.transform.position = new Vector3(-0.968f, 7f, 2.76f);
+        zone.transform.position = new Vector3(-0.968f, 2f, 2.76f);
+        yield return new WaitForSeconds(4);
+        Assert.IsNotNull(player);
+        objeto = GameObject.FindWithTag("item2");
+        Assert.IsNotNull(objeto);
+        Assert.AreEqual(2, objeto.GetComponent<ItemLevel>().Level);
+    }
+
+
 }

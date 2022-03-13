@@ -21,6 +21,7 @@ public class Zone_1 : MonoBehaviour
         if (other.CompareTag("Player") )
         {
             LootSystem.Intance.Level = 1;
+
         }
     }
     }
