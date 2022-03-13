@@ -9,7 +9,7 @@ using UnityEngine.TestTools;
 
 public class DoesFloorExist : MonoBehaviour
 {
-    string SceneName = "Mandon Enemy AI Scene";
+    string SceneName = "MandonWorldGenScene";
 
     [SetUp]
     public void SetUp()
