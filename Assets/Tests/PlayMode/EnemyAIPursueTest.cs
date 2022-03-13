@@ -6,11 +6,9 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-
-
-public class EnemyAITests 
+public class EnemyAIPursueTest 
 {
-    string SceneName = "MandonEnemyAITests";
+    string SceneName = "MandonEnemyAITestPursue";
     float EnemyDistanceFromPlayer;
     float PreviousEnemyDistanceFromPlayer;
 
@@ -23,15 +21,14 @@ public class EnemyAITests
     [UnityTest]
     public IEnumerator DoesEnemyPursuePlayer()
     {
-        yield return null; //wait one frame
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
         
         Assert.IsNotNull(enemy);
         Assert.IsNotNull(player);
 
-        player.transform.position = new Vector3(3.2f, 2.5f, -3.3f); //Position of player close enough so the enemy range is triggered (simulates player movement) 
-        yield return null; //wait one frame
+        enemy.transform.position = new Vector3(12.3f, 2.5f, -2.2f); //resets enemy position
+        player.transform.position = new Vector3(3.9f, 2.5f, -1.3f); //Position of player close enough so the enemy range is triggered (simulates player movement) 
 
         EnemyDistanceFromPlayer =Vector3.Distance(player.transform.position, enemy.transform.position);
         PreviousEnemyDistanceFromPlayer = EnemyDistanceFromPlayer;
@@ -52,7 +49,6 @@ public class EnemyAITests
         Debug.Log("Enemy Distance Test: " + EnemyDistanceFromPlayer);
         Assert.Less(EnemyDistanceFromPlayer, PreviousEnemyDistanceFromPlayer); //If the enemy is moving closer to the player, their distances should be smaller each 0.3 seconds.
 
-        yield return new WaitForSeconds(0.3f);
 
         //if every second the enemy is getting closer, then the test will succeed! (and ofcourse, both the player and the enemy must exist for it to pass)
     }

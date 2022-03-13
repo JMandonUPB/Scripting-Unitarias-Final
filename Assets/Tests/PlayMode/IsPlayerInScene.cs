@@ -9,7 +9,7 @@ using UnityEngine.TestTools;
 
 public class IsPlayerInScene
 {
-    string SceneName = "MandonWorldGenScene";
+    string SceneName = "MandonWorldGen";
 
     [SetUp]
     public void SetUp()

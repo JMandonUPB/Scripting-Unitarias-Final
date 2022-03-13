@@ -65,7 +65,7 @@ public class EnemyCoreAI : MonoBehaviour
     [SerializeField] int currentPathInt = 0;
     [SerializeField] int randomIntGenerator;
 
-    private enum State
+    public enum State
     {
         Idle,
         RoamingAround,
@@ -74,7 +74,8 @@ public class EnemyCoreAI : MonoBehaviour
         ReturnToRoamPoint
     }
 
-    [SerializeField] private State state;
+    public State CurrentState { get; private set; }
+
 
     private void Awake()
     {
@@ -89,7 +90,7 @@ public class EnemyCoreAI : MonoBehaviour
         roamPosition1 = roamPoint1.GetComponent<Transform>().position;
         roamPosition2 = roamPoint2.GetComponent<Transform>().position;
         roamPosition3 = roamPoint3.GetComponent<Transform>().position;
-        state = State.Idle;
+        CurrentState = State.Idle;
     }
 
     // Update is called once per frame
@@ -101,7 +102,7 @@ public class EnemyCoreAI : MonoBehaviour
 
     void StateSwitcher()    //manages states
     {
-            switch (state)
+            switch (CurrentState)
             {
                 case State.Idle:
                 Idle();
@@ -146,12 +147,12 @@ public class EnemyCoreAI : MonoBehaviour
         if (idleTimer > Random.Range(idleTimerMin, idleTimerMax)) //va (enemigo) a diambular si se cumple
         {
             idleTimer = 0;
-            state = State.RoamingAround;
+            CurrentState = State.RoamingAround;
         }
 
         if (IsPlayerInTriggerDistance())
         {
-            state = State.ChasingPlayer;
+            CurrentState = State.ChasingPlayer;
         }
     }
     float DistanceFromPlayer() //calcula la distancia del enemigo al player 
@@ -214,7 +215,7 @@ public class EnemyCoreAI : MonoBehaviour
 
         if (IsPlayerInTriggerDistance())
         {
-            state = State.ChasingPlayer;
+            CurrentState = State.ChasingPlayer;
         }
 
         
@@ -258,7 +259,7 @@ public class EnemyCoreAI : MonoBehaviour
 
                     case 4:
                         roamTimer = 0;
-                        state = State.Idle;
+                        CurrentState = State.Idle;
                         break;
                 }
             }
@@ -290,7 +291,7 @@ public class EnemyCoreAI : MonoBehaviour
         if (!IsPlayerInMeleeAttackDistance())
         {
             canMeleeAttack = false;
-            state = State.ChasingPlayer;
+            CurrentState = State.ChasingPlayer;
         }
 
     }
@@ -307,13 +308,13 @@ public class EnemyCoreAI : MonoBehaviour
         }
         else if (IsPlayerInExitDistance())
         {
-            state = State.Idle;
+            CurrentState = State.Idle;
         }
 
         if (IsPlayerInMeleeAttackDistance())
         {
             canMeleeAttack = true;
-            state = State.AttackPlayer;
+            CurrentState = State.AttackPlayer;
         }
         else canMeleeAttack = false;
     }
@@ -322,7 +323,7 @@ public class EnemyCoreAI : MonoBehaviour
     {
         if (agent.pathStatus == NavMeshPathStatus.PathComplete)
         {
-            state = State.Idle;
+            CurrentState = State.Idle;
             //reachedWaypoint = true;
         }
 

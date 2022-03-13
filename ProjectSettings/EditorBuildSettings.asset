@@ -6,10 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Testing Scenes/MandonWorldGenScene.unity
+    path: Assets/Testing Scenes/MandonWorldGen.unity
     guid: 0f4eb9edadbb69b4993761397aee35d8
   - enabled: 1
-    path: Assets/Testing Scenes/MandonEnemyAITests.unity
+    path: Assets/Testing Scenes/MandonEnemyAITestPursue.unity
     guid: 17ea734fecdb4044a90800295a26fb1a
+  - enabled: 1
+    path: Assets/Testing Scenes/MandonEnemyAITestAttack.unity
+    guid: 2518e83d1bcb99449867e54c9b64877e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 698e02fb34bc87643bdf9997f0a5d399, type: 2}
