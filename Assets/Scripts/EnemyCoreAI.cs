@@ -6,11 +6,11 @@ using UnityEngine.AI;
 public class EnemyCoreAI : MonoBehaviour
 {
     //General nav logic
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
 
     //Timers
-    float roamTimer = 0f;
-    float roamTimerMax = 4f;
+    private float roamTimer = 0f;
+    private float roamTimerMax = 4f;
 
     //debug
     private Renderer renderer;
@@ -19,8 +19,8 @@ public class EnemyCoreAI : MonoBehaviour
     [SerializeField] float triggerEnemyDistance = 10f;
     [SerializeField] float triggerEnemyExitDistance = 14;
 
-    float idleTimerMax = 3f;
-    float idleTimerMin = 1f;
+    private float idleTimerMax = 3f;
+    private float idleTimerMin = 1f;
 
     
 
@@ -29,7 +29,7 @@ public class EnemyCoreAI : MonoBehaviour
     private float distanceFromPlayer = 0f;
 
     //References
-    [SerializeField] private GameObject playerBaseGameObject;
+    [SerializeField]  GameObject playerBaseGameObject;
 
     [SerializeField] private Material materialGrey; //these are for debugging!
     [SerializeField] private Material materialRed;
@@ -46,8 +46,6 @@ public class EnemyCoreAI : MonoBehaviour
     private Vector3 roamPosition3;
     private GameObject debugStateBall;
 
-    Animator animator;
-    
     private GameObject playerArmature; //this one has the "proper" transform of the actual player
 
     //Melee logic
@@ -55,19 +53,19 @@ public class EnemyCoreAI : MonoBehaviour
     private float meleeTimer = 0;
     private float meleeTimerMax = 0.3f;
 
-    float triggerEnemyMeleeDistance = 2.9f;
-    float rangedAttackDistance; //unused 4 now
+    private float triggerEnemyMeleeDistance = 2.9f;
+    private float rangedAttackDistance; //unused 4 now
 
-    bool canMeleeAttack = false;
+    private bool canMeleeAttack = false;
 
     //idle logic
-    float idleTimer = 0;
+    private float idleTimer = 0;
 
     //Quick temporal debug variables
     [SerializeField] int currentPathInt = 0;
     [SerializeField] int randomIntGenerator;
 
-    private enum State
+    public enum State
     {
         Idle,
         RoamingAround,
@@ -76,14 +74,14 @@ public class EnemyCoreAI : MonoBehaviour
         ReturnToRoamPoint
     }
 
-    [SerializeField] private State state;
+    public State CurrentState { get; private set; }
+
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         renderer = transform.Find("DebugStateBall").GetComponent<Renderer>();
-        playerArmature = playerBaseGameObject.transform.Find("PlayerLogicMovement/PlayerArmature").gameObject; //if null ref error triggers here, you must find (type the name) the gameobject that holds the actual character sin dezface
+        playerArmature = playerBaseGameObject.transform.Find("PlayerArmature").gameObject; //if null ref error triggers here, you must find (type the name) the gameobject that holds the actual character sin dezface
         meleeHitbox = transform.Find("MeleeHitbox").gameObject;
     }
     
@@ -92,7 +90,7 @@ public class EnemyCoreAI : MonoBehaviour
         roamPosition1 = roamPoint1.GetComponent<Transform>().position;
         roamPosition2 = roamPoint2.GetComponent<Transform>().position;
         roamPosition3 = roamPoint3.GetComponent<Transform>().position;
-        state = State.Idle;
+        CurrentState = State.Idle;
     }
 
     // Update is called once per frame
@@ -104,33 +102,31 @@ public class EnemyCoreAI : MonoBehaviour
 
     void StateSwitcher()    //manages states
     {
-            switch (state)
+            switch (CurrentState)
             {
                 case State.Idle:
                 Idle();
-                ResetAllAnimatorTriggers();
-                animator.SetTrigger("TriggerIdle");
-                Debug.Log("Idle");
+                //Debug.Log("Idle");
                 break;
 
             case State.RoamingAround:
                 RoamingAround();
-                Debug.Log("RoamingAround");
+                //Debug.Log("RoamingAround");
                 break;
 
                 case State.ChasingPlayer:
                  ChasePlayer();
-                 Debug.Log("ChasingPlayer");
+                 //Debug.Log("ChasingPlayer");
                     break;
 
             case State.AttackPlayer:
                 AttackPlayer();
-                 Debug.Log("AttackingPlayer");
+                 //Debug.Log("AttackingPlayer");
                     break;
 
             case State.ReturnToRoamPoint:
                 RoamingAround();
-                  Debug.Log("ReturnToRoamPoints");
+                  //Debug.Log("ReturnToRoamPoints");
                     break;
 
                 default:
@@ -145,23 +141,23 @@ public class EnemyCoreAI : MonoBehaviour
         agent.isStopped = true; //stops agent
 
         renderer.material = materialGrey; //para simular cambio de estado
-        Debug.Log("Im currently idle");
+       // Debug.Log("Im currently idle");
         idleTimer += Time.deltaTime;
 
         if (idleTimer > Random.Range(idleTimerMin, idleTimerMax)) //va (enemigo) a diambular si se cumple
         {
             idleTimer = 0;
-            state = State.RoamingAround;
+            CurrentState = State.RoamingAround;
         }
 
         if (IsPlayerInTriggerDistance())
         {
-            state = State.ChasingPlayer;
+            CurrentState = State.ChasingPlayer;
         }
     }
     float DistanceFromPlayer() //calcula la distancia del enemigo al player 
     {
-        Debug.Log("Distancia " + (distanceFromPlayer = Vector3.Distance(playerArmature.transform.position, transform.position))); //for debbuging
+        //Debug.Log("Distancia " + (distanceFromPlayer = Vector3.Distance(playerArmature.transform.position, transform.position))); //for debbuging
         return distanceFromPlayer = Vector3.Distance(playerArmature.transform.position, transform.position); //calcula distancia
 
         
@@ -219,15 +215,14 @@ public class EnemyCoreAI : MonoBehaviour
 
         if (IsPlayerInTriggerDistance())
         {
-            state = State.ChasingPlayer;
+            CurrentState = State.ChasingPlayer;
         }
 
         
         if (roamTimer > roamTimerMaxRandom) //nota, este codigo puede mejorarse si se identifica que haya llegado a cada waypoint
         {
-            animator.SetTrigger("TriggerRoam");
             randomIntGenerator = Random.Range(1, 5);
-            Debug.LogWarning("Random int " + randomIntGenerator);
+            //Debug.LogWarning("Random int " + randomIntGenerator);
 
             if(randomIntGenerator == currentPathInt) //if the path is the same, change the number
             {
@@ -242,7 +237,7 @@ public class EnemyCoreAI : MonoBehaviour
                         ReachedWaypoint(); //goes idle if waypoint is reached
                         currentPathInt = randomIntGenerator;
                         MoveAgent(roamPosition1);
-                        Debug.Log("Poing to pos 1");
+                        //Debug.Log("Poing to pos 1");
                         roamTimer = 0;
                         break;
 
@@ -250,7 +245,7 @@ public class EnemyCoreAI : MonoBehaviour
                         ReachedWaypoint();
                         currentPathInt = randomIntGenerator;
                         MoveAgent(roamPosition2);
-                        Debug.Log("Poing to pos 2");
+                       // Debug.Log("Poing to pos 2");
                         roamTimer = 0;
                         break;
 
@@ -258,13 +253,13 @@ public class EnemyCoreAI : MonoBehaviour
                         ReachedWaypoint();
                         currentPathInt = randomIntGenerator;
                         MoveAgent(roamPosition3);
-                        Debug.Log("Poing to pos 3");
+                       // Debug.Log("Poing to pos 3");
                         roamTimer = 0;
                         break;
 
                     case 4:
                         roamTimer = 0;
-                        state = State.Idle;
+                        CurrentState = State.Idle;
                         break;
                 }
             }
@@ -296,7 +291,7 @@ public class EnemyCoreAI : MonoBehaviour
         if (!IsPlayerInMeleeAttackDistance())
         {
             canMeleeAttack = false;
-            state = State.ChasingPlayer;
+            CurrentState = State.ChasingPlayer;
         }
 
     }
@@ -313,13 +308,13 @@ public class EnemyCoreAI : MonoBehaviour
         }
         else if (IsPlayerInExitDistance())
         {
-            state = State.Idle;
+            CurrentState = State.Idle;
         }
 
         if (IsPlayerInMeleeAttackDistance())
         {
             canMeleeAttack = true;
-            state = State.AttackPlayer;
+            CurrentState = State.AttackPlayer;
         }
         else canMeleeAttack = false;
     }
@@ -328,25 +323,11 @@ public class EnemyCoreAI : MonoBehaviour
     {
         if (agent.pathStatus == NavMeshPathStatus.PathComplete)
         {
-            state = State.Idle;
+            CurrentState = State.Idle;
             //reachedWaypoint = true;
         }
 
-        //bool reachedWaypoint = false;
-
-        //if (agent.hasPath)
-        //{
-        //    if (agent.pathStatus == NavMeshPathStatus.PathComplete)
-        //    {
-        //        state = State.Idle;
-        //        reachedWaypoint = true;
-        //    }
-        //    else reachedWaypoint = false;
-        //}
-        //else reachedWaypoint = false;
-
-        //return reachedWaypoint;
-    }
+     }
     void MoveAgent(Vector3 moveDestinationVec3)
     {
         agent.SetDestination(moveDestinationVec3);
@@ -357,15 +338,4 @@ public class EnemyCoreAI : MonoBehaviour
         //}
     }
 
-
-    void ResetAllAnimatorTriggers()
-    {
-        foreach (var trigger in animator.parameters)
-        {
-            if (trigger.type == AnimatorControllerParameterType.Trigger)
-            {
-                animator.ResetTrigger(trigger.name);
-            }
-        }
-    }
 }
