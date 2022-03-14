@@ -14,7 +14,7 @@ Las complicaciones empezarón en el momento en el que le hicimos Fork a nuestro 
 
 - Problemas de Compilación y demora en la importación del proyecto (se nos iban más de 10 min cada que importabamos a local el repo)
 <img width="554" alt="ErrorCompilacion" src="https://user-images.githubusercontent.com/83988504/158104050-3b17bc14-2a1c-4e36-8c84-24f530e39780.png">
-![DemoraImportando](https://user-images.githubusercontent.com/83988504/158106274-f9fb4103-fffc-4f8c-a980-d2b1d24c8c8e.png)
+![DemoraImportando](https://user-images.githubusercontent.com/83988504/158106378-65c8c12a-99d7-415a-ab68-5ab3ddd0407d.png)
 
 - La cuenta de Cicerí estaba subiendo los archivos a velocidad tortuga (sopechamos que puede estar relacionado a un probelma de los servidores a los que está asociada la cuenta...) 
 - Cada Vez que Nico abría el proyecto en unity se le creaban más de 300 mil arvhicvos nuevos para subir al siguiente comit sin ni siquiera hacer algún cambio
