@@ -42,3 +42,23 @@ Desde aquí las cosas comezaron a mejorar gracias a que las dificultades disminu
 
 Y finalmente el resto de dificultades estuvieron en la curva de aprendizaje de las pruebas unitarias dentro de Unity.
 - Pero en esencia lo unico que nos sigué dando sin funcionar fuerón las pruebas que teníamos pensadas para el movimiento porque el proyecto original usamos el nuevo input System de Unity y no encontramos una manera sencilla de simular los imputs del jugador, por ende nos dedicamos a testear las otras funcionalidades básicas del juego.
+
+_Probamos:_
+
+- El sistema de los enemigos (Testeamos si persigue al player y testear si lo ataca y efectivamente baja la vida.)
+- Testeamos que el suelo spawnee y que el player está actualmente en la escena.
+- El drop de items con diferentes tiers (Testeamos 3 cofres distintos y que cada uno dropean items de 3 tiers distintos.)
+- Testeamos que el player puede utilizar una poción de curación 2 veces, sumandole +60 a la vida.
+
+IMPORTANTE:
+No es necesario darle play a las escenas, Todas las pruebas se ejecutan desde el Test Runner y luego seleccionar si se van a correr todas o alguna en especifico.
+Los Test están en la carpeta Assets/Tests , y dentro están las pruebas unitarias , en el orden de ejecución se explica que hace cada una. Las escenas en las que se basan están en Assets/TesstingScenes (aunque no es necesario abrirlas).
+
+_Descripción de las pruebas:_
+
+- DoesFloorExist/DoesMyFloorExist: para probar que se pueda crear el terreno , se hizo esta pequeña prueba que comprueba que el piso es creado y si  exista
+- EnemyAlAttackTest/DoesEnemuAttackPlayer: esta prueba se hizo para comprobar que el enemigo se acerque  al usuario y aparte le baje la vida  
+- EnemuAllPuesueTest/ DoesEnemyPursuePlayer: esta prueba se hizo para comprobar que el enemigo si persiga al jugador
+- IsPlayerinScene/IsPlayerCurrenTliyInScene: Esta prueba se hizo para comprobar que el jugador si se crea en el mapa
+- ITemChestDropinngTest/TestitemDropTier1,2,3:Se hizo esta prueba para saber si el cofre funciona para Dropear los objetos según cada Tier 
+
