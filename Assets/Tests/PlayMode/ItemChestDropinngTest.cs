@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 
 
-public class iteamDroping 
+public class ItemChestDropinngTest 
 {
     private GameObject myChest;
     private GameObject Player;
@@ -16,13 +16,13 @@ public class iteamDroping
     [SetUp]
     public void SetUp()
     {
-        EditorSceneManager.LoadScene("Ciceri_Test 1");
+        EditorSceneManager.LoadScene("CiceriTestCofreTier123");
        
     }
     [TearDown]
     public void Teardown()
     {
-        EditorSceneManager.UnloadSceneAsync("Ciceri_Test 1");
+        EditorSceneManager.UnloadSceneAsync("CiceriTestCofreTier123");
     }
     [UnityTest]
     public IEnumerator TestItemDropTier1()
@@ -47,7 +47,7 @@ public class iteamDroping
         GameObject zone = GameObject.Find("zone_1");
         player.transform.position = new Vector3(-0.968f, 7f, 2.76f);
         zone.transform.position = new Vector3(-0.968f, 2f, 2.76f);
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
         Assert.IsNotNull(player);
         objeto = GameObject.FindWithTag("item1");
 
@@ -63,7 +63,7 @@ public class iteamDroping
         GameObject zone = GameObject.Find("zone_2");
         player.transform.position = new Vector3(-0.968f, 7f, 2.76f);
         zone.transform.position = new Vector3(-0.968f, 2f, 2.76f);
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
         Assert.IsNotNull(player);
         objeto = GameObject.FindWithTag("item2");
         Assert.IsNotNull(objeto);
