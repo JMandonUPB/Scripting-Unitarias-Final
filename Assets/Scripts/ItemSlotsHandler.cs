@@ -11,9 +11,9 @@ public class ItemSlotsHandler : MonoBehaviour
     public ActiveSkillItems[] activeSkillItems = new ActiveSkillItems[2];
     private StarterAssets.StarterAssetsInputs input;
     private float item1Cooldown = 0, item2Cooldown = 0;
-    public bool isInputSimulated = false;
+    public bool IsInputSimulated = false;
     //Timers for Simulation
-    float simulatedTimer = 0f;
+    float simulatedTimer = 10f;
     float simulatedTimerMax = 3f;
 
     void Start()
@@ -49,7 +49,7 @@ public class ItemSlotsHandler : MonoBehaviour
     }
     void SimulatedUsedSlot1()
     {
-        if (isInputSimulated)
+        if (IsInputSimulated)
         {
             simulatedTimer += Time.deltaTime;
 
@@ -58,12 +58,10 @@ public class ItemSlotsHandler : MonoBehaviour
                 simulatedTimer = 0f;
                 //Simula que el jugador presinó la tecla "1" (para las pruebas initarias)
                 input.ItemSlot_1 = true;
-
             }
             else
             {
                 input.ItemSlot_1 = false;
-                
             }
         }
     }
