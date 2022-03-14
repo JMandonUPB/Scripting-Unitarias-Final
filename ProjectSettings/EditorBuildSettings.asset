@@ -15,7 +15,12 @@ EditorBuildSettings:
     path: Assets/Testing Scenes/MandonEnemyAITestAttack.unity
     guid: 2518e83d1bcb99449867e54c9b64877e
   - enabled: 1
+<<<<<<< Updated upstream
     path: Assets/Testing Scenes/Ciceri_Test 1.unity
     guid: 937430a44a25e4c498145168c40b43ef
+=======
+    path: Assets/Testing Scenes/PickUps_TestScene.unity
+    guid: a48ba05aaed86094a8b53c02cce44d8a
+>>>>>>> Stashed changes
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 698e02fb34bc87643bdf9997f0a5d399, type: 2}
