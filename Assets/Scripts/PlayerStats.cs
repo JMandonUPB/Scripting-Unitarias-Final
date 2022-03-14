@@ -8,8 +8,6 @@ public class PlayerStats : MonoBehaviour
     public int CurrentHealth = 30;
     public float LightningRES = 0, FireRES = 0, IceRES = 0, PhysicalRES = 0;
 
-    //public bool IsTriggered = false;
-
     public void Heal(int amount)
     {
         CurrentHealth += amount;
@@ -37,7 +35,6 @@ public class PlayerStats : MonoBehaviour
             Heal(other.gameObject.GetComponent<HealthPickup>().AmountToHeal);
             Destroy(other.gameObject);
             Debug.Log("Current Health: " + CurrentHealth + "/" + maxHealth);
-            //IsTriggered = true;
         }
     }
 }

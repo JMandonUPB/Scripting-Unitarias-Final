@@ -195,7 +195,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2450333025602809448, guid: 6674a5cbd4fa17b419b3278d2c95bf8d, type: 3}
       propertyPath: maxHealth
-      value: 100
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2450333025602809448, guid: 6674a5cbd4fa17b419b3278d2c95bf8d, type: 3}
+      propertyPath: CurrentHealth
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2547189774508203583, guid: 6674a5cbd4fa17b419b3278d2c95bf8d, type: 3}
       propertyPath: activeSkillItems.Array.data[0]
