@@ -22,22 +22,27 @@ public class DoesPickUpHeal : MonoBehaviour
     public IEnumerator DoesMyPickupHeal()
     {
         //Probar que la posición al ser usada restaure 10 de vida
-       
         //Arange:
         GameObject player;        
         player = GameObject.FindGameObjectWithTag("Player");
        
         int playerOriginalHealth = player.GetComponent<PlayerStats>().CurrentHealth;
         int playerActualHealth = playerOriginalHealth;
-        
+        //Vamos a ver si lo siguiente es legal
+        ActiveSkillItems[] skillItems = player.GetComponent<ItemSlotsHandler>().activeSkillItems;
         Assert.IsNotNull(player); //Me aseguro que el player exista
 
-        player.transform.position = Vector3.zero;   
+        //imito el imput 1 a traves del get set?
+        skillItems[0].Activate(); //posición donde se encuentra la posición de regeneración
+
+        //player.transform.position = Vector3.zero;   
         yield return new WaitForSeconds(2);
         //Act:
+
         
         Assert.Greater(playerActualHealth, playerOriginalHealth); //Se asegura que haya subido la vida
-        Assert.AreEqual(playerActualHealth, playerOriginalHealth + 10); //Confirma que haya subido la vida 10 unidades
+        playerOriginalHealth = playerOriginalHealth + 10; 
+        Assert.AreEqual(playerActualHealth, playerOriginalHealth); //Confirma que haya subido la vida 10 unidades
 
         /*var healObject = new GameObject("Trigger");
         healObject.transform.position = Vector3.zero;
@@ -45,12 +50,11 @@ public class DoesPickUpHeal : MonoBehaviour
         var PlayerStats = healObject.AddComponent(typeof(PlayerStats)) as PlayerStats;
         var triggerBoxCollider = healObject.AddComponent(typeof(BoxCollider)) as BoxCollider;
         triggerBoxCollider.isTrigger = true;
-        
         var player = new GameObject("Collider");
         player.AddComponent(typeof(BoxCollider)) as BoxCollider;
         player.AddComponent(typeof(RigidBody)) as RigidBody;
         player.transform.position = healObject.transform.position;
-        *//
+        */
         //Assert.IsTrue(PlayerStats.IsTriggered);
     }
     public void Teardown()
